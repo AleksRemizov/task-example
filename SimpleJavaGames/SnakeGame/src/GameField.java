@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class GameField extends JPanel {
+public class GameField extends JPanel implements ActionListener{
     private final int SIZE = 320;
     private final int DOT_SIZE = 16;
     private final int ALL_DOTS = 400;
@@ -47,7 +49,18 @@ public class GameField extends JPanel {
 
         ImageIcon saveDot = new ImageIcon("dot.png");
         dot = saveDot.getImage();
-
+    }
+    public void moveSnake(){
 
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(inGame){
+            moveSnake();
+        }
+
+    }
+        repaint();
+
 }
