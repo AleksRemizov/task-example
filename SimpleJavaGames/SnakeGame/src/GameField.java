@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class GameField extends JPanel {
     private final int SIZE = 320;
@@ -35,6 +36,8 @@ public class GameField extends JPanel {
         createApple();
     }
     public void createApple(){
+        appleX = new Random().nextInt(20)*DOT_SIZE;
+        appleY = new Random().nextInt(20)*DOT_SIZE;
 
     }
 
