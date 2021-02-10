@@ -50,7 +50,38 @@ public class GameField extends JPanel implements ActionListener{
         ImageIcon saveDot = new ImageIcon("dot.png");
         dot = saveDot.getImage();
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(inGame){
+            g.drawImage(apple,appleX,appleY,this);
+            for (int i = 0; i < dots; i++) {
+                g.drawImage(dot,x[i],y[i],this);
+
+            }
+
+        }
+
+    }
+
     public void moveSnake(){
+        for (int i = dots; i >0 ; i--) {
+            x[i] = x[i-1];
+            y[i] = y[i-1];
+        }
+        if(left){
+            x[0] -=DOT_SIZE;
+        }
+        if(right){
+            x[0] +=DOT_SIZE;
+        }
+        if(up){
+            y[0] -=DOT_SIZE;
+        }
+        if(down){
+            y[0] +=DOT_SIZE;
+        }
 
     }
 
@@ -59,8 +90,8 @@ public class GameField extends JPanel implements ActionListener{
         if(inGame){
             moveSnake();
         }
-
-    }
         repaint();
+    }
+
 
 }
