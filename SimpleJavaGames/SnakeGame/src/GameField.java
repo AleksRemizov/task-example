@@ -26,6 +26,7 @@ public class GameField extends JPanel implements ActionListener{
     public GameField(){
         setBackground(Color.DARK_GRAY);
         loadImages();
+        initGame();
     }
     public void initGame(){
         dots = 3;
@@ -58,11 +59,8 @@ public class GameField extends JPanel implements ActionListener{
             g.drawImage(apple,appleX,appleY,this);
             for (int i = 0; i < dots; i++) {
                 g.drawImage(dot,x[i],y[i],this);
-
             }
-
         }
-
     }
 
     public void moveSnake(){
@@ -82,12 +80,19 @@ public class GameField extends JPanel implements ActionListener{
         if(down){
             y[0] +=DOT_SIZE;
         }
-
+    }
+    public void checkApple(){
+        if(x[0] == appleX && y[0] == appleY){
+            dots++;
+            createApple();
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(inGame){
+            checkApple();
+            checkCollisions();
             moveSnake();
         }
         repaint();
