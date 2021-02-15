@@ -26,16 +26,17 @@ public class GameField extends JPanel implements ActionListener{
 
 
     public GameField(){
-        setBackground(Color.DARK_GRAY);
+        setBackground(Color.black);
         loadImages();
         initGame();
-        addKeyListener(new FileKeyListener());
+        addKeyListener(new FieldKeyListener());
         setFocusable(true);
     }
+
     public void initGame(){
         dots = 3;
         for (int i = 0; i < dots; i++) {
-            x[i] = 48 -i*DOT_SIZE;
+            x[i] = 48 - DOT_SIZE * i;
             y[i] = 48;
         }
         timer = new Timer(250,this);
@@ -67,28 +68,28 @@ public class GameField extends JPanel implements ActionListener{
         }else {
             String endGame = "Game Over";
             Font f = new Font("Arian",15,Font.BOLD);
-            g.setColor(Color.BLUE);
+            g.setColor(Color.white);
             g.drawString(endGame,125,SIZE/2);
 
         }
     }
 
-    public void moveSnake(){
-        for (int i = dots; i >0 ; i--) {
+    public void move(){
+        for (int i = dots; i > 0 ; i--) {
             x[i] = x[i-1];
             y[i] = y[i-1];
         }
         if(left){
-            x[0] -=DOT_SIZE;
+            x[0] -= DOT_SIZE;
         }
         if(right){
-            x[0] +=DOT_SIZE;
+            x[0] += DOT_SIZE;
         }
         if(up){
-            y[0] -=DOT_SIZE;
+            y[0] -= DOT_SIZE;
         }
         if(down){
-            y[0] +=DOT_SIZE;
+            y[0] += DOT_SIZE;
         }
     }
     public void checkApple(){
@@ -99,7 +100,7 @@ public class GameField extends JPanel implements ActionListener{
     }
     public void checkCollisions(){
         for (int i = dots; i >0 ; i--) {
-            if(i>4 && x[0]== x[i] && y[0] == y[i]){
+            if(i>4 && x[0] == x[i] && y[0] == y[i]){
                 inGame = false;
             }
         }
@@ -122,36 +123,35 @@ public class GameField extends JPanel implements ActionListener{
         if(inGame){
             checkApple();
             checkCollisions();
-            moveSnake();
+            move();
         }
         repaint();
     }
-    class FileKeyListener extends KeyAdapter{
+    class FieldKeyListener extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
             int key = e.getKeyCode();
-            if(key == KeyEvent.VK_LEFT && ! right){
+            if(key == KeyEvent.VK_LEFT && !right){
                 left = true;
                 up = false;
                 down = false;
             }
-            if(key == KeyEvent.VK_RIGHT && ! left){
+            if(key == KeyEvent.VK_RIGHT && !left){
                 right = true;
                 up = false;
                 down = false;
             }
-            if(key == KeyEvent.VK_DOWN && ! up){
-                down = true;
-                right = false;
-                left = false;
-            }
-            if(key == KeyEvent.VK_UP && ! down){
+            if(key == KeyEvent.VK_UP && !down){
                 up = true;
                 right = false;
                 left = false;
             }
-
+            if(key == KeyEvent.VK_DOWN && !up){
+                down = true;
+                right = false;
+                left = false;
+            }
         }
     }
 
