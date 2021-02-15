@@ -65,13 +65,13 @@ public class GameField extends JPanel implements ActionListener{
             for (int i = 0; i < dots; i++) {
                 g.drawImage(dot,x[i],y[i],this);
             }
-        }else {
+        }/*else {
             String endGame = "Game Over";
             Font f = new Font("Arian",15,Font.BOLD);
             g.setColor(Color.white);
             g.drawString(endGame,125,SIZE/2);
 
-        }
+        }*/
     }
 
     public void move(){
