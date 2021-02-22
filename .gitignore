@@ -1,4 +1,10 @@
 name.log
-
+.idea
 stash_me.txt
+*.iml
+**/build
+**/dist
+out/*
+
+
 
