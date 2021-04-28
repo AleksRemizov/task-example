@@ -1,5 +1,7 @@
 package com.remizov.bookstore.entity;
 
+import com.remizov.bookstore.model.BookGenre;
+
 public class Book {
     private long bookId;
     private String bookTitle;
