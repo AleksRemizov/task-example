@@ -13,8 +13,8 @@ public class CSVFileReader implements FileReader {
     public Map<Integer, BigDecimal> readDate(String filePath) throws IOException {
         Map<Integer,BigDecimal> resultMap = new TreeMap<>();
         InputStream inputStream = getClass().getResourceAsStream("/" + filePath);
-        try(InputStreamReader inputStreamReader = new InputStreamReader(inputStream)){
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        try(InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String line;
             String [] values;
             while ((line = bufferedReader.readLine()) != null){

@@ -20,8 +20,36 @@ public class Main {
 
         PriceSelector priceSelector = new PriceSelector();
 
-        Double [] enteredValue = new Double[4];
+        BigDecimal [] enteredValue = new BigDecimal[2];
         Scanner scanner = new Scanner(System.in);
         String inputValue;
+         int i = 0;
+         do {
+             if (i == 0) {
+                 System.out.println("Please,enter distance:");
+             } else if (i == 1){
+                 System.out.println("Please,enter weight:");
+             }
+             inputValue = scanner.next();
+             if(inputValue.equalsIgnoreCase("Q")){
+                 break;
+             }else if (isCorrectDoubleValue(inputValue)){
+                 enteredValue[i] = new BigDecimal(inputValue);
+                 i++;
+             }else {
+                 System.out.println("Incorrect value " + inputValue);
+             }
+
+         }while (true);
+    }
+    private  static boolean isCorrectDoubleValue(String value){
+        boolean checkResult;
+        try{
+            double enteredValue = Double.parseDouble(value);
+            checkResult = enteredValue >= 0;
+        }catch (NumberFormatException ex ){
+            checkResult = false;
+        }
+        return checkResult;
     }
 }
