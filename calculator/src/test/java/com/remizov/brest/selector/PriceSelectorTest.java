@@ -1,17 +1,16 @@
 package com.remizov.brest.selector;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 public class PriceSelectorTest {
 
-    @org.junit.Test
+    @Test
     public void selectPriceValue() {
         Map<Integer, BigDecimal> values = new HashMap<>();
         values.put(1, new BigDecimal(100));

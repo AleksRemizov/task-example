@@ -25,9 +25,8 @@ public class Main {
         String inputValue;
          int i = 0;
          do {
-             if (i == 0) {
-                 System.out.println("Please,enter distance:");
-             } else if (i == 1){
+             if (i == 0) System.out.println("Please,enter distance:");
+             else if (i == 1){
                  System.out.println("Please,enter weight:");
              }
              inputValue = scanner.next();
