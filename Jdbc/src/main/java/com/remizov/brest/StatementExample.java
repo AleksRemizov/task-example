@@ -19,12 +19,13 @@ public class StatementExample {
         properties.put("autoReconnect","true");
         properties.put("characterEncoding","UTF-8");
         properties.put("useUnicode","true");
+        properties.put("useSSL","true");
         /*properties.put("cacheDefaultTimeZone","true");
         properties.put("continueBatchOnError","true");
         properties.put("dontTrackOpenResources","false");
         properties.put("queryTimeoutKillsConnection","false");*/
 
-        try (Connection connection = DriverManager.getConnection(url,properties);
+        /*try (Connection connection = DriverManager.getConnection(url,properties);
              Statement statement =  connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                                                                 ResultSet.CONCUR_UPDATABLE)){
             String sql = "SELECT IDphonebook, lastname, phone FROM phonebook";
@@ -50,6 +51,17 @@ public class StatementExample {
                 subscribers.add(new Subscriber(id,name,phone));
             }
             System.out.println(subscribers);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+        try(Connection connection = DriverManager.getConnection(url,properties)) {
+            String sql = "INSERT INTO phonebook(IDphonebook, lastname, phone) VALUES(?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,41);
+            preparedStatement.setString(2,"Savchuk");
+            preparedStatement.setInt(3,112233);
+            int rowsUpdate = preparedStatement.executeUpdate();
+            System.out.println(rowsUpdate);
         } catch (SQLException e) {
             e.printStackTrace();
         }
