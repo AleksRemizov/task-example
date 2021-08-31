@@ -1,5 +1,7 @@
 package com.remizov.brest;
 
+import com.remizov.brest.entity.Subscriber;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
