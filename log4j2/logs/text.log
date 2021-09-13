@@ -1,0 +1,10 @@
+2021-09-13 15:50:40.800 INFO  [main] Log4jExample - info log
+2021-09-13 15:50:40.805 WARN  [main] Log4jExample - Warning!!!LOGGER!!!
+2021-09-13 15:50:40.806 ERROR [main] Log4jExample - runtime
+java.lang.RuntimeException: Exception runtime
+	at com.remizov.brest.Log4jExample.main(Log4jExample.java:13) [log4j2/:?]
+INFO  2021-09-13 15:57:08.878  [main] com.remizov.brest.Log4jExample - info log
+WARN  2021-09-13 15:57:08.900  [main] com.remizov.brest.Log4jExample - Warning!!!LOGGER!!!
+ERROR 2021-09-13 15:57:08.901  [main] com.remizov.brest.Log4jExample - runtime
+java.lang.RuntimeException: Exception runtime
+	at com.remizov.brest.Log4jExample.main(Log4jExample.java:13) [log4j2/:?]

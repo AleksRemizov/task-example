@@ -18,8 +18,8 @@ public interface BaseDao <K ,T extends Entity> {
         if(statement != null){
             statement.close();
         }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     default void close(Connection connection){
@@ -27,8 +27,8 @@ public interface BaseDao <K ,T extends Entity> {
             if(connection != null){
                 connection.close();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
