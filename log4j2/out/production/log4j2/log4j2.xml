@@ -2,44 +2,55 @@
 <Configuration status="INFO">
     <Properties>
         <property name="LOG_DIR">logs</property>
-        <property name="ARCHIVE LOG_DIR">${LOG_DIR}/archive</property>
+        <property name="ARCHIVE_LOG_DIR">${LOG_DIR}/archive</property>
         <property name="pattern_file"> %-5level %d{yyyy-MM-dd HH:mm:ss.SSS}  [%t] %logger{5} - %msg%n</property>
         <property name="pattern_console">%relative %-5level [%t] %c{1} - %msg%n</property>
-
     </Properties>
+    <ThresholdFilter level="trace"/>
     <Appenders>
         <File name="FileLog" filename="${LOG_DIR}/text.log" bufferedIO="true">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
-        <Console name="console" target="SYSTEM_OUT">
+        <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout
                     pattern="${pattern_console}" />
         </Console>
-        <RollingFile name="FileRolling" filename="logs/text_log.log" append="true"
+        <RollingFile name="FileZip" filename="${ARCHIVE_LOG_DIR}/text_arch.log" append="true"
+                     filepattern="${ARCHIVE_LOG_DIR}/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log.zip">
+            <PatternLayout pattern="${pattern_file}"/>
+            <BurstFilter level="INFO" rate="16" maxBurst="100"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="15 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="FileRolling" filename="logs/text_roll.log" append="true"
                      filepattern="logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
             <PatternLayout pattern="${pattern_file}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="1 KB"/>
+                <SizeBasedTriggeringPolicy size="15 KB"/>
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="console" level="debug" additivity="false">
-        <AppenderRef ref="console" />
+        <Logger name="Log_Console" level="debug" additivity="false">
+        <AppenderRef ref="Console" />
         </Logger>
-        <Logger name="LogFile" level="debug" additivity="false">
+        <Logger name="Log_File" level="debug" additivity="false">
         <AppenderRef ref="FileLog" />
         </Logger>
         <Logger name="Zip_File" level="debug" additivity="false">
             <AppenderRef ref="FileZip" />
         </Logger>
-        <Logger name="RollingFile" level="debug" additivity="false">
+        <Logger name="Rolling_File" level="debug" additivity="false">
             <AppenderRef ref="FileRolling" />
         </Logger>
         <Root level="debug" additivity="false">
             <AppenderRef ref="FileRolling" />
-            <AppenderRef ref="console" level="trace"/>
+            <!--AppenderRef ref="FileZip" /-->
+            <AppenderRef ref="FileLog" />
+            <AppenderRef ref="Console" level="trace"/>
         </Root>
     </Loggers>
 </Configuration>
